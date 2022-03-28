@@ -1,13 +1,15 @@
-name: (GitHub Actions) Cypress
+name: (GitHub Actions) Cypress（ローカルで実行する）
 
 on:
-  push:
-    branches:
-      - main
-      - development
-  pull_request:
-    branches:
-      - development
+  # ローカル実行かつパブリックリポジトリなので、全てのケースで実行する
+  - push
+  # push:
+  #   branches:
+  #     - main
+  #     - development
+  # pull_request:
+  #   branches:
+  #     - development
 
 jobs:
   cypress_figure_dd:
@@ -74,15 +76,13 @@ jobs:
       - name: Cypress を実行する
         uses: cypress-io/github-action@v2.11.7
         with:
-          working-directory: .
+          start: npx cypress
+          working-directory: ./
           config-file: cypress.json
-          record: true
+          record: false
           browser: chrome
           # browser: firefox
           # browser: edge
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Cypress のスクリーンショットをアップロードする
         uses: actions/upload-artifact@v2.2.4
         if: always()
