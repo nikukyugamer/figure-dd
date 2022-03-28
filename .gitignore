@@ -15,3 +15,6 @@ dist/
 
 .history
 .vscode
+
+cypress/screenshots/
+cypress/videos/
