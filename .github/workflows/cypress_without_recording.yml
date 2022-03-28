@@ -84,13 +84,13 @@ jobs:
           # browser: firefox
           # browser: edge
       - name: Cypress のスクリーンショットをアップロードする
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3.0.0
         if: always()
         with:
           name: cypress_screenshots
           path: cypress/screenshots/
       - name: Cypress の動画をアップロードする
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3.0.0
         if: always()
         with:
           name: cypress_videos
