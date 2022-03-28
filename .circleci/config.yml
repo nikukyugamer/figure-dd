@@ -7,13 +7,57 @@ jobs:
   figure_dd_build_and_test:
     docker:
       - image: cimg/node:16.14
+    working_directory: ~/figure_dd
     steps:
       - checkout
       - node/install-packages:
           pkg-manager: yarn
       - run:
-          name: Run tests
+          name: 環境を確認する
+          command: |
+            echo '[$ pwd]'
+            pwd
+            echo '[$ ls -la]'
+            ls -la
+      - run:
+          name: 画像と動画の保存用のディレクトリを作成する
+          command: |
+            mkdir -p /tmp/cypress/videos /tmp/cypress/screenshots
+      - run:
+          # https://docs.cypress.io/guides/continuous-integration/introduction#Dependencies
+          name: OS の基本的なパッケージをインストールする
+          command: |
+            sudo apt update --allow-releaseinfo-change
+            sudo apt install -y gconf-service libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc-s1 libgdk-pixbuf2.0-0 libglib2.0-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 ca-certificates fonts-liberation lsb-release xdg-utils wget lsof libvulkan1 udev libudev1 libu2f-udev libgbm1 libwayland-server0
+            sudo apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+      - run:
+          name: libffi7 対策
+          command: |
+            sudo ln -s /usr/lib/x86_64-linux-gnu/libffi.so.7.1.0 /usr/lib/x86_64-linux-gnu/libffi.so.6
+      - run:
+          name: 日本語フォントのインストールを行う
+          command: |
+            sudo apt install -y fonts-ipaexfont
+      - run:
+          name: Google Chrome をインストールする
+          command: |
+            curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo dpkg -i google-chrome.deb
+            sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
+            rm google-chrome.deb
+            /opt/google/chrome/google-chrome --version
+      - run:
+          name: Run Jest
           command: yarn test
+      - run:
+          name: Run Cypress
+          command: npx cypress run
+      - store_artifacts:
+          path: cypress/screenshots
+          destination: /tmp/cypress/screenshots
+      - store_artifacts:
+          path: cypress/videos
+          destination: /tmp/cypress/videos
 
 workflows:
   main_workflow:
