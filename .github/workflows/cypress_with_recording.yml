@@ -23,9 +23,9 @@ jobs:
           pwd
           echo '[$ ls -la]'
           ls -la
-      - name: Google Noto Fonts のインストールを行う
+      - name: 日本語フォントのインストールを行う
         run: |
-          sudo apt install -y fonts-noto
+          sudo apt install -y fonts-migmix
       - name: Cypress 用のパッケージをインストールする
         run: |
           sudo apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
