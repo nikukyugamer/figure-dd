@@ -74,7 +74,7 @@ jobs:
         run: |
           yarn install
       - name: Cypress を実行する
-        uses: cypress-io/github-action@v4.0.0
+        uses: cypress-io/github-action@v4.0.1
         with:
           start: npx cypress
           working-directory: ./
