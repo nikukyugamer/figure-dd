@@ -73,7 +73,7 @@ jobs:
         uses: cypress-io/github-action@v4.0.1
         with:
           working-directory: ./
-          config-file: cypress.json
+          config-file: cypress.config.ts
           record: true
           browser: chrome
           # browser: firefox
