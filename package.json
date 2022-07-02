@@ -9,7 +9,7 @@
     "@typescript-eslint/parser": "5.30.3",
     "cypress": "10.3.0",
     "dotenv": "16.0.1",
-    "eslint": "8.18.0",
+    "eslint": "8.19.0",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-jest": "26.5.3",
     "expect-playwright": "0.8.0",
