@@ -20,5 +20,6 @@
   },
   "ts-node": {
     "files": true
-  }
+  },
+  "exclude": ["__tests__/*.spec.ts"]
 }

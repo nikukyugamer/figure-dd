@@ -1,29 +1,31 @@
-name: (GitHub Actions) Cypress
+name: (GitHub Actions) Cypress（SaaS上で実行する）
 
 on:
-  push:
-    branches:
-      - main
-      - development
-  pull_request:
-    branches:
-      - development
+  # あっという間に無料枠の上限（Test Results 500）に達するので、実質 SaaS では使えない
+  - workflow_dispatch
+  # push:
+  #   branches:
+  #     - main
+  #     - development
+  # pull_request:
+  #   branches:
+  #     - development
 
 jobs:
   cypress_figure_dd:
     name: Cypress での E2E テスト
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3.1.0
       - name: 環境を確認する
         run: |
           echo '[$ pwd]'
           pwd
           echo '[$ ls -la]'
           ls -la
-      - name: Google Noto Fonts のインストールを行う
+      - name: 日本語フォントのインストールを行う
         run: |
-          sudo apt install -y fonts-noto
+          sudo apt install -y fonts-migmix
       - name: Cypress 用のパッケージをインストールする
         run: |
           sudo apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
@@ -48,10 +50,6 @@ jobs:
       - name: npm-run-all をグローバルにインストールする
         run: |
           npm install -g npm-run-all
-      - name: アーティファクト用のディレクトリを作成する
-        run: |
-          mkdir cypress/videos
-          mkdir cypress/screenshots
       - name: Yarn のインストールを行う
         run: |
           curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -62,7 +60,7 @@ jobs:
         id: yarn-cache
         run: echo "::set-output name=dir::.yarn/cache"
       - name: Yarn のキャッシュファイルを取得する
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.11
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
@@ -72,10 +70,10 @@ jobs:
         run: |
           yarn install
       - name: Cypress を実行する
-        uses: cypress-io/github-action@v2.11.7
+        uses: cypress-io/github-action@v5.0.0
         with:
-          working-directory: .
-          config-file: cypress.json
+          working-directory: ./
+          config-file: cypress.config.ts
           record: true
           browser: chrome
           # browser: firefox
@@ -83,15 +81,3 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Cypress のスクリーンショットをアップロードする
-        uses: actions/upload-artifact@v2.2.4
-        if: always()
-        with:
-          name: cypress_screenshots
-          path: cypress/screenshots/
-      - name: Cypress の動画をアップロードする
-        uses: actions/upload-artifact@v2.2.4
-        if: always()
-        with:
-          name: cypress_videos
-          path: cypress/videos/
