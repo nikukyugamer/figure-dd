@@ -6,7 +6,7 @@ orbs:
 jobs:
   figure_dd_build_and_test:
     docker:
-      - image: cimg/node:19.0
+      - image: cimg/node:19.2
     working_directory: ~/figure_dd
     steps:
       - checkout
