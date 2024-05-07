@@ -16,7 +16,7 @@ jobs:
       matrix:
         node-version: [20.x, 22.x]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: 環境の確認
       run: |
         echo '[$ pwd]'
