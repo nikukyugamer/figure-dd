@@ -2697,14 +2697,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-cypress@npm:2.15.2":
-  version: 2.15.2
-  resolution: "eslint-plugin-cypress@npm:2.15.2"
+"eslint-plugin-cypress@npm:3.2.0":
+  version: 3.2.0
+  resolution: "eslint-plugin-cypress@npm:3.2.0"
   dependencies:
     globals: "npm:^13.20.0"
   peerDependencies:
-    eslint: ">= 3.2.1"
-  checksum: 10c0/bcc521633251a852dc3c115455ddda931435bb61c0895e5ad1abe43acb3a15fc0b0e79bf73b7aa078794a2b1084232f1b74ffe39d631a3f312265f97941cd290
+    eslint: ">=7"
+  checksum: 10c0/c422a5c3a45e5a968bbfb0265cc377f99dd4835325b2ef1519674eb4dae855b81c1d6db7117603f5ff6e9c63ca72138c444810c7404e492926de2f32e596c780
   languageName: node
   linkType: hard
 
@@ -3090,7 +3090,7 @@ __metadata:
     cypress: "npm:13.8.1"
     dotenv: "npm:16.4.5"
     eslint: "npm:9.2.0"
-    eslint-plugin-cypress: "npm:2.15.2"
+    eslint-plugin-cypress: "npm:3.2.0"
     eslint-plugin-jest: "npm:27.9.0"
     expect-playwright: "npm:0.8.0"
     jest: "npm:29.7.0"
