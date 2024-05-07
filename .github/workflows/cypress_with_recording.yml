@@ -32,14 +32,11 @@ jobs:
       - name: libffi7 対策
         run: |
           sudo ln -s /usr/lib/x86_64-linux-gnu/libffi.so.7.1.0 /usr/lib/x86_64-linux-gnu/libffi.so.6
-      - name: Node.js をインストールする
-        run: |
-          curl -sSL "https://nodejs.org/dist/v16.14.2/node-v16.14.2-linux-x64.tar.xz" | tar --strip-components=2 -xJ -C /usr/local/bin/ node-v16.14.2-linux-x64/bin/node
-          curl https://www.npmjs.com/install.sh | bash
-          echo 'インストールされた Node.js のバージョンは、'
-          node -v
-          echo 'インストールされた npm のバージョンは、'
-          npm -v
+      - name: Node.js をセットアップする
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+          cache: yarn
       - name: npm 自身をアップグレードする
         run: |
           echo 'アップグレード前の npm のバージョンは、'
