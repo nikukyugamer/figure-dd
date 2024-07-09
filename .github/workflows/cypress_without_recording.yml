@@ -16,7 +16,7 @@ jobs:
     name: Cypress での E2E テスト
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4.1.6
+      - uses: actions/checkout@v4.1.7
       - name: 環境を確認する
         run: |
           echo '[$ pwd]'
@@ -55,7 +55,7 @@ jobs:
         run: |
           yarn install
       - name: Cypress を実行する
-        uses: cypress-io/github-action@v6.7.0
+        uses: cypress-io/github-action@v6.7.1
         with:
           start: npx cypress
           working-directory: ./
@@ -65,13 +65,13 @@ jobs:
           # browser: firefox
           # browser: edge
       - name: Cypress のスクリーンショットをアップロードする
-        uses: actions/upload-artifact@v4.3.3
+        uses: actions/upload-artifact@v4.3.4
         if: always()
         with:
           name: cypress_screenshots
           path: cypress/screenshots/
       - name: Cypress の動画をアップロードする
-        uses: actions/upload-artifact@v4.3.3
+        uses: actions/upload-artifact@v4.3.4
         if: always()
         with:
           name: cypress_videos
