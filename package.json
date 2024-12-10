@@ -2,7 +2,7 @@
   "name": "figure_dd",
   "version": "0.0.1",
   "devDependencies": {
-    "@playwright/test": "1.49.0",
+    "@playwright/test": "1.49.1",
     "@types/jest": "29.5.14",
     "@types/node": "22.10.1",
     "@typescript-eslint/eslint-plugin": "8.18.0",
