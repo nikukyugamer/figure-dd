@@ -51,7 +51,7 @@ jobs:
         run: |
           yarn install
       - name: Cypress を実行する
-        uses: cypress-io/github-action@v6.7.15
+        uses: cypress-io/github-action@v6.7.16
         with:
           working-directory: ./
           config-file: cypress.config.ts
