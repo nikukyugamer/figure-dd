@@ -4,7 +4,7 @@
   "devDependencies": {
     "@playwright/test": "1.52.0",
     "@types/jest": "29.5.14",
-    "@types/node": "22.15.20",
+    "@types/node": "22.15.21",
     "@typescript-eslint/eslint-plugin": "8.32.1",
     "@typescript-eslint/parser": "8.32.1",
     "cypress": "14.4.0",
